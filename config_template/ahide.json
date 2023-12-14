@@ -204,8 +204,11 @@
         "direct",
         "{all}"
       ],
+      "filter":[
+        {"action":"exclude","keywords":["网站|剩余|流量|过期|时间|期|地址"]}
+      ],
       "default": "auto",
-      "interrupt_exist_connections": false	  
+      "interrupt_exist_connections": false
     },
     {
       "tag":"auto",
@@ -213,13 +216,10 @@
       "outbounds":[
         "{all}"
       ],
-      "filter":[
-        {"action":"exclude","keywords":["网站|剩余|流量|过期|时间|期|地址"]}
-      ],
       "url": "http://www.gstatic.com/generate_204",
       "interval": "30m",
-      "tolerance": 50
-    },	
+      "tolerance": 30
+    },
     {
       "type": "direct",
       "tag": "direct"

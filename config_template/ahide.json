@@ -32,12 +32,10 @@
       {
         "outbound": "any",
         "server": "local",
-		"disable_cache": true		
+	"disable_cache": true		
       },
       {
-        "rule_set": [
-          "geosite-category-ads-all"
-        ],
+        "rule_set": "geosite-category-ads-all",
         "server": "block"
       },
       {
@@ -76,14 +74,14 @@
         "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs",
         "download_detour": "select"
       },
-	  {
-		"tag": "geoip-cn",
+      {
+	"tag": "geoip-cn",
         "type": "remote",		
         "format": "binary",
         "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs",
         "download_detour": "select"
       },	  
-	  {
+      {
         "tag": "geosite-cn",
         "type": "remote",		
         "format": "binary",
@@ -107,18 +105,26 @@
     ],
     "rules": [
       {
-        "protocol": "dns",
+        "type": "logical",
+        "mode": "or",
+        "rules": [
+          {
+            "protocol": "dns"
+          },
+          {
+            "port": 53
+          }
+        ],
         "outbound": "dns-out"
       },
       {
-        "network": "udp",
-        "port": 443,
+        "rule_set": "geosite-category-ads-all",
         "outbound": "block"
-      },	  
+      },
       {
         "ip_is_private": true,
         "outbound": "direct"
-      },	  
+      },
       {
         "clash_mode": "direct",
         "outbound": "direct"
@@ -128,8 +134,19 @@
         "outbound": "select"
       },
       {
-        "rule_set": [
-          "geosite-category-ads-all"
+        "type": "logical",
+        "mode": "or",
+        "rules": [
+          {
+            "port": 853
+          },
+          {
+            "network": "udp",
+            "port": 443
+          },
+          {
+            "protocol": "stun"
+          }
         ],
         "outbound": "block"
       },
@@ -240,9 +257,9 @@
       "secret": "",
       "default_mode": "rule"
     },
-	"cache_file": {
-	  "enabled": true,
-	  "store_fakeip": false
-	}
+    "cache_file": {
+      "enabled": true,
+      "store_fakeip": false
+    }
   }  
 }

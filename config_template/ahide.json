@@ -196,8 +196,8 @@
       "platform": {
         "http_proxy": {
           "enabled": true,
-          "server": "::",
-          "server_port": 2202
+          "server": "127.0.0.1",
+          "server_port": 9595
         }
       }
     },
@@ -205,9 +205,7 @@
       "type": "mixed",
       "tag": "mixed-in",
       "listen": "::",
-      "listen_port": 2202,
-      "tcp_fast_open": true,
-      "udp_fragment": true,
+      "listen_port": 9595,
       "sniff": true,
       "sniff_override_destination": false
     }

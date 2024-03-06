@@ -20,6 +20,10 @@
         "address": "fakeip"
       },
       {
+        "tag": "refuse",
+        "address": "rcode://refused"
+      },
+      {
         "tag": "block",
         "address": "rcode://success"
       }
@@ -44,6 +48,12 @@
         ],
         "server": "block",
         "disable_cache": true
+      },
+      {
+        "query_type": [
+          "HTTPS"
+        ],
+        "server": "refuse"
       },
       {
         "outbound": "any",

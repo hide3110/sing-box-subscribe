@@ -7,25 +7,28 @@
   "dns": {
     "servers": [
       {
-        "tag": "google",
-        "address": "tls://8.8.8.8"
+        "tag": "dns_proxy",
+        "address": "https://1.1.1.1/dns-query",
+        "address_resolver": "dns_resolver"
       },
       {
-        "tag": "local",
+        "tag": "dns_direct",
+        "address": "h3://dns.alidns.com/dns-query",
+        "address_resolver": "dns_resolver",
+        "detour": "direct"
+      },
+      {
+        "tag": "dns_resolver",
         "address": "223.5.5.5",
         "detour": "direct"
       },
       {
-        "tag": "remote",
+        "tag": "dns_fakeip",
         "address": "fakeip"
       },
       {
-        "tag": "refuse",
+        "tag": "dns_block",
         "address": "rcode://refused"
-      },
-      {
-        "tag": "block",
-        "address": "rcode://success"
       }
     ],
     "rules": [
@@ -46,18 +49,18 @@
             ]
           }
         ],
-        "server": "block",
+        "server": "dns_block",
         "disable_cache": true
       },
       {
         "query_type": [
           "HTTPS"
         ],
-        "server": "refuse"
+        "server": "dns_block"
       },
       {
         "outbound": "any",
-        "server": "local",
+        "server": "dns_resolver",
         "disable_cache": true
       },
       {
@@ -65,7 +68,7 @@
           "A",
           "AAAA"
         ],
-        "server": "remote",
+        "server": "dns_fakeip",
         "rewrite_ttl": 1
       },
       {
@@ -74,15 +77,15 @@
           "cdn.jsdelivr.net",
           "testingcf.jsdelivr.net"
         ],
-        "server": "remote"
+        "server": "dns_fakeip"
       },
       {
         "clash_mode": "direct",
-        "server": "local"
+        "server": "dns_direct"
       },
       {
         "clash_mode": "global",
-        "server": "remote"
+        "server": "dns_fakeip"
       },
       {
         "type": "logical",
@@ -99,7 +102,7 @@
             ]
           }
         ],
-        "server": "local"
+        "server": "dns_direct"
       }
     ],
     "fakeip": {

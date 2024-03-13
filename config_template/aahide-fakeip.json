@@ -8,17 +8,10 @@
     "servers": [
       {
         "tag": "dns_proxy",
-        "address": "https://1.1.1.1/dns-query",
-        "address_resolver": "dns_resolver"
+        "address": "tls://8.8.8.8"
       },
       {
         "tag": "dns_direct",
-        "address": "h3://dns.alidns.com/dns-query",
-        "address_resolver": "dns_resolver",
-        "detour": "direct"
-      },
-      {
-        "tag": "dns_resolver",
         "address": "223.5.5.5",
         "detour": "direct"
       },
@@ -54,7 +47,7 @@
       },
       {
         "outbound": "any",
-        "server": "dns_resolver",
+        "server": "dns_direct",
         "disable_cache": true
       },
       {

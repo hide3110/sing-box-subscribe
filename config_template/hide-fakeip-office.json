@@ -7,21 +7,21 @@
   "dns": {
     "servers": [
       {
-        "tag": "google",
+        "tag": "dns_proxy",
         "address": "tls://8.8.8.8"
       },
       {
-        "tag": "local",
+        "tag": "dns_direct",
         "address": "223.5.5.5",
         "detour": "direct"
       },
       {
-        "tag": "remote",
+        "tag": "dns_fakeip",
         "address": "fakeip"
       },
       {
-        "tag": "block",
-        "address": "rcode://success"
+        "tag": "dns_block",
+        "address": "rcode://refused"
       }
     ],
     "rules": [
@@ -42,12 +42,18 @@
             ]
           }
         ],
-        "server": "block",
+        "server": "dns_block",
         "disable_cache": true
       },
       {
+        "query_type": [
+          "HTTPS"
+        ],
+        "server": "dns_block"
+      },
+      {
         "outbound": "any",
-        "server": "local",
+        "server": "dns_direct",
         "disable_cache": true
       },
       {
@@ -55,7 +61,7 @@
           "A",
           "AAAA"
         ],
-        "server": "remote",
+        "server": "dns_fakeip",
         "rewrite_ttl": 1
       },
       {
@@ -64,15 +70,15 @@
           "cdn.jsdelivr.net",
           "testingcf.jsdelivr.net"
         ],
-        "server": "remote"
+        "server": "dns_fakeip"
       },
       {
         "clash_mode": "direct",
-        "server": "local"
+        "server": "dns_direct"
       },
       {
         "clash_mode": "global",
-        "server": "remote"
+        "server": "dns_fakeip"
       },
       {
         "type": "logical",
@@ -89,7 +95,7 @@
             ]
           }
         ],
-        "server": "local"
+        "server": "dns_direct"
       }
     ],
     "fakeip": {
@@ -229,7 +235,7 @@
       "type": "tun",
       "tag": "tun-in",
       "inet4_address": "172.19.0.1/30",
-      "mtu": 9000,
+      "mtu": 1420,
       "auto_route": true,
       "strict_route": true,
       "stack": "gvisor",
@@ -250,7 +256,7 @@
         {
           "action": "exclude",
           "keywords": [
-            "网站|官网|剩余|过期|时间|地址|注册|订阅"
+            "网站|过期|时间|地址|注册"
           ]
         }
       ],
@@ -282,7 +288,7 @@
   ],
   "experimental": {
     "clash_api": {
-      "external_controller": "127.0.0.1:9090",
+      "external_controller": "127.0.0.1:9099",
       "external_ui": "ui",
       "secret": "",
       "default_mode": "rule"

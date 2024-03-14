@@ -46,6 +46,12 @@
         "disable_cache": true
       },
       {
+        "query_type": [
+          "HTTPS"
+        ],
+        "server": "dns_block"
+      },
+      {
         "outbound": "any",
         "server": "dns_direct",
         "disable_cache": true

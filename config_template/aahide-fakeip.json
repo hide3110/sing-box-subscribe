@@ -78,7 +78,7 @@
       },
       {
         "clash_mode": "global",
-        "server": "dns_fakeip"
+        "server": "dns_proxy"
       },
       {
         "type": "logical",

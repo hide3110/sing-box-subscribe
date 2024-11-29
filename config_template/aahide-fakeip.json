@@ -4,6 +4,19 @@
     "level": "warn",
     "timestamp": true
   },
+  "experimental": {
+    "clash_api": {
+      "external_controller": "127.0.0.1:9099",
+      "external_ui": "ui",
+      "secret": "",
+      "default_mode": "rule"
+    },
+    "cache_file": {
+      "enabled": true,
+      "store_fakeip": true,
+      "store_rdrc": true
+    }
+  },
   "dns": {
     "servers": [
       {
@@ -21,56 +34,17 @@
       },
       {
         "tag": "dns_block",
-        "address": "rcode://refused"
+        "address": "rcode://success"
       }
     ],
     "rules": [
       {
-        "type": "logical",
-        "mode": "or",
-        "rules": [
-          {
-            "rule_set": "geosite-category-ads-all"
-          },
-          {
-            "domain_suffix": [
-              "appcenter.ms",
-              "app-measurement.com",
-              "firebase.io",
-              "crashlytics.com",
-              "google-analytics.com"
-            ]
-          }
-        ],
-        "server": "dns_block",
-        "disable_cache": true
-      },
-      {
-        "query_type": [
-          "HTTPS"
-        ],
+        "rule_set": "geosite-category-ads-all",
         "server": "dns_block"
       },
       {
         "outbound": "any",
-        "server": "dns_direct",
-        "disable_cache": true
-      },
-      {
-        "query_type": [
-          "A",
-          "AAAA"
-        ],
-        "server": "dns_fakeip",
-        "rewrite_ttl": 1
-      },
-      {
-        "domain": [
-          "ghproxy.com",
-          "cdn.jsdelivr.net",
-          "testingcf.jsdelivr.net"
-        ],
-        "server": "dns_fakeip"
+        "server": "dns_direct"
       },
       {
         "clash_mode": "direct",
@@ -81,7 +55,14 @@
         "server": "dns_proxy"
       },
       {
-        "rule_set": "geosite-geolocation-cn",
+        "query_type": [
+          "A",
+          "AAAA"
+        ],
+        "server": "dns_fakeip"
+      },
+      {
+        "rule_set": "geosite-cn",
         "server": "dns_direct"
       },
       {
@@ -97,7 +78,7 @@
           }
         ],
         "server": "dns_proxy",
-        "client_subnet": "202.96.134.33"
+        "client_subnet": "114.114.114.114/24"
       }
     ],
     "fakeip": {
@@ -113,29 +94,29 @@
         "tag": "geosite-category-ads-all",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs",
-        "download_detour": "select"
+        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/category-ads-all.srs",
+        "download_detour": "direct"
       },
       {
-        "tag": "geosite-geolocation-cn",
+        "tag": "geosite-cn",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-geolocation-cn.srs",
-        "download_detour": "select"
+        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/cn.srs",
+        "download_detour": "direct"
       },
       {
         "tag": "geoip-cn",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs",
-        "download_detour": "select"
+        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/cn.srs",
+        "download_detour": "direct"
       },
       {
         "tag": "geosite-geolocation-!cn",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-geolocation-!cn.srs",
-        "download_detour": "select"
+        "url": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/geolocation-!cn.srs",
+        "download_detour": "direct"
       }
     ],
     "rules": [
@@ -144,10 +125,10 @@
         "mode": "or",
         "rules": [
           {
-            "protocol": "dns"
+            "port": 53
           },
           {
-            "port": 53
+            "protocol": "dns"
           }
         ],
         "outbound": "dns-out"
@@ -157,16 +138,25 @@
         "outbound": "block"
       },
       {
-        "ip_is_private": true,
-        "outbound": "direct"
-      },
-      {
         "clash_mode": "direct",
         "outbound": "direct"
       },
       {
         "clash_mode": "global",
         "outbound": "select"
+      },
+      {
+        "domain": [
+          "clash.razord.top",
+          "yacd.metacubex.one",
+          "yacd.haishan.me",
+          "d.metacubex.one"
+        ],
+        "outbound": "direct"
+      },
+      {
+        "ip_is_private": true,
+        "outbound": "direct"
       },
       {
         "type": "logical",
@@ -186,45 +176,19 @@
         "outbound": "block"
       },
       {
-        "domain_suffix": [
-          "appcenter.ms",
-          "app-measurement.com",
-          "firebase.io",
-          "crashlytics.com",
-          "google-analytics.com"
-        ],
-        "outbound": "block"
-      },
-      {
-        "type": "logical",
-        "mode": "or",
-        "rules": [
-          {
-            "domain_suffix": [
-              "evergrande.com"
-            ]
-          },
-          {
-            "domain": [
-              "clash.razord.top",
-              "yacd.metacubex.one",
-              "yacd.haishan.me",
-              "d.metacubex.one"
-            ]
-          }
-        ],
-        "outbound": "direct"
+        "rule_set": "geosite-geolocation-!cn",
+        "outbound": "select"
       },
       {
         "rule_set": [
           "geoip-cn",
-          "geosite-geolocation-cn"
+          "geosite-cn"
         ],
         "outbound": "direct"
       }
     ],
-    "final": "select",
-    "auto_detect_interface": true
+    "auto_detect_interface": true,
+    "final": "select"
   },
   "inbounds": [
     {
@@ -234,10 +198,9 @@
         "172.19.0.1/30",
         "fdfe:dcba:9876::1/126"
       ],
-      "mtu": 1420,
+      "stack": "system",
       "auto_route": true,
       "strict_route": true,
-      "stack": "system",
       "sniff": true,
       "sniff_override_destination": false,
       "platform": {
@@ -292,24 +255,12 @@
       "tag": "direct"
     },
     {
-      "type": "block",
-      "tag": "block"
-    },
-    {
       "type": "dns",
       "tag": "dns-out"
-    }
-  ],
-  "experimental": {
-    "clash_api": {
-      "external_controller": "127.0.0.1:9099",
-      "external_ui": "ui",
-      "secret": "",
-      "default_mode": "rule"
     },
-    "cache_file": {
-      "enabled": true,
-      "store_fakeip": true
+    {
+      "type": "block",
+      "tag": "block"
     }
-  }
+  ]
 }

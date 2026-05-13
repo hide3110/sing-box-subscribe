@@ -234,7 +234,6 @@
       {
         "domain_suffix": [
           "gemini.google.com",
-          "proactivebackend-pa.googleapis.com",
           "robinfrontend-pa.googleapis.com",
           "claude.ai"
         ],
@@ -269,20 +268,19 @@
       ],
       "stack": "system",
       "auto_route": true,
-      "strict_route": true,
-      "platform": {
-        "http_proxy": {
-          "enabled": true,
-          "server": "127.0.0.1",
-          "server_port": 9595
-        }
-      }
+      "strict_route": true
     },
     {
       "type": "mixed",
       "tag": "mixed-in",
-      "listen": "::",
-      "listen_port": 9595
+      "listen": "0.0.0.0",
+      "listen_port": 9595,
+      "users": [
+        {
+          "username": "hide3110",
+          "password": "Sara56013@"
+        }
+      ]
     }
   ],
   "outbounds": [
@@ -314,7 +312,7 @@
         "America",
         "Others"
       ],
-      "default": "Singapore"
+      "default": "America"
     },
     {
       "tag": "Talkatone",

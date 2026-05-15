@@ -287,10 +287,7 @@
     {
       "tag": "proxy",
       "type": "selector",
-      "outbounds": [
-        "auto",
-        "🕳ℹ️all"
-      ],
+      "outbounds": [],
       "default": "auto",
       "interrupt_exist_connections": true
     },
@@ -337,57 +334,43 @@
     {
       "tag": "HongKong",
       "type": "selector",
-      "outbounds": [
-        "🕳ℹ️all"
-      ],
+      "outbounds": [],
       "interrupt_exist_connections": true
     },
     {
       "tag": "TaiWan",
       "type": "selector",
-      "outbounds": [
-        "🕳ℹ️all"
-      ],
+      "outbounds": [],
       "interrupt_exist_connections": true
     },
     {
       "tag": "Singapore",
       "type": "selector",
-      "outbounds": [
-        "🕳ℹ️all"
-      ],
+      "outbounds": [],
       "interrupt_exist_connections": true
     },
     {
       "tag": "Japan",
       "type": "selector",
-      "outbounds": [
-        "🕳ℹ️all"
-      ],
+      "outbounds": [],
       "interrupt_exist_connections": true
     },
     {
       "tag": "America",
       "type": "selector",
-      "outbounds": [
-        "🕳ℹ️all"
-      ],
+      "outbounds": [],
       "interrupt_exist_connections": true
     },
     {
       "tag": "Others",
       "type": "selector",
-      "outbounds": [
-        "🕳ℹ️all"
-      ],
+      "outbounds": [],
       "interrupt_exist_connections": true
     },
     {
       "tag": "auto",
       "type": "urltest",
-      "outbounds": [
-        "🕳ℹ️all"
-      ],
+      "outbounds": [],
       "url": "http://www.gstatic.com/generate_204",
       "interval": "30m",
       "tolerance": 30,

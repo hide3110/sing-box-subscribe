@@ -288,16 +288,29 @@
       "tag": "proxy",
       "type": "selector",
       "outbounds": [
-        "auto"
+        "auto",
+        "🕳ℹ️all"
       ],
       "default": "auto",
+      "interrupt_exist_connections": true
+    },
+    {
+      "tag": "OpenAI",
+      "type": "selector",
+      "outbounds": [
+        "TaiWan",
+        "Singapore",
+        "Japan",
+        "America",
+        "Others"
+      ],
+      "default": "America",
       "interrupt_exist_connections": true
     },
     {
       "tag": "Ai",
       "type": "selector",
       "outbounds": [
-        "HongKong",
         "TaiWan",
         "Singapore",
         "Japan",
@@ -324,46 +337,61 @@
     {
       "tag": "HongKong",
       "type": "selector",
-      "outbounds": [],
+      "outbounds": [
+        "🕳ℹ️all"
+      ],
       "interrupt_exist_connections": true
     },
     {
       "tag": "TaiWan",
       "type": "selector",
-      "outbounds": [],
+      "outbounds": [
+        "🕳ℹ️all"
+      ],
       "interrupt_exist_connections": true
     },
     {
       "tag": "Singapore",
       "type": "selector",
-      "outbounds": [],
+      "outbounds": [
+        "🕳ℹ️all"
+      ],
       "interrupt_exist_connections": true
     },
     {
       "tag": "Japan",
       "type": "selector",
-      "outbounds": [],
+      "outbounds": [
+        "🕳ℹ️all"
+      ],
       "interrupt_exist_connections": true
     },
     {
       "tag": "America",
       "type": "selector",
-      "outbounds": [],
+      "outbounds": [
+        "🕳ℹ️all"
+      ],
       "interrupt_exist_connections": true
     },
     {
       "tag": "Others",
       "type": "selector",
-      "outbounds": [],
+      "outbounds": [
+        "🕳ℹ️all"
+      ],
       "interrupt_exist_connections": true
     },
     {
       "tag": "auto",
       "type": "urltest",
-      "outbounds": [],
+      "outbounds": [
+        "🕳ℹ️all"
+      ],
       "url": "http://www.gstatic.com/generate_204",
       "interval": "30m",
-      "tolerance": 30
+      "tolerance": 30,
+      "interrupt_exist_connections": true
     },
     {
       "type": "direct",

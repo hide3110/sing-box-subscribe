@@ -288,25 +288,16 @@
       "tag": "proxy",
       "type": "selector",
       "outbounds": [
-        "auto",
-        "{all}"
-      ],
-      "filter": [
-        {
-          "action": "exclude",
-          "keywords": [
-            "网站|过期|时间|地址|注册",
-            "官网|剩余|流量|套餐|到期"
-          ]
-        }
+        "auto"
       ],
       "default": "auto",
       "interrupt_exist_connections": true
     },
     {
-      "tag": "OpenAI",
+      "tag": "Ai",
       "type": "selector",
       "outbounds": [
+        "HongKong",
         "TaiWan",
         "Singapore",
         "Japan",
@@ -333,107 +324,43 @@
     {
       "tag": "HongKong",
       "type": "selector",
-      "outbounds": [
-        "{all}"
-      ],
-      "filter": [
-        {
-          "action": "include",
-          "keywords": [
-            "🇭🇰|HK|hk|香港|港|HongKong"
-          ]
-        }
-      ],
+      "outbounds": [],
       "interrupt_exist_connections": true
     },
     {
       "tag": "TaiWan",
       "type": "selector",
-      "outbounds": [
-        "{all}"
-      ],
-      "filter": [
-        {
-          "action": "include",
-          "keywords": [
-            "🇹🇼|TW|tw|台湾|臺灣|台|Taiwan"
-          ]
-        }
-      ],
+      "outbounds": [],
       "interrupt_exist_connections": true
     },
     {
       "tag": "Singapore",
       "type": "selector",
-      "outbounds": [
-        "{all}"
-      ],
-      "filter": [
-        {
-          "action": "include",
-          "keywords": [
-            "🇸🇬|SG|sg|新加坡|狮|Singapore"
-          ]
-        }
-      ],
+      "outbounds": [],
       "interrupt_exist_connections": true
     },
     {
       "tag": "Japan",
       "type": "selector",
-      "outbounds": [
-        "{all}"
-      ],
-      "filter": [
-        {
-          "action": "include",
-          "keywords": [
-            "🇯🇵|JP|jp|日本|日|Japan"
-          ]
-        }
-      ],
+      "outbounds": [],
       "interrupt_exist_connections": true
     },
     {
       "tag": "America",
       "type": "selector",
-      "outbounds": [
-        "{all}"
-      ],
-      "filter": [
-        {
-          "action": "include",
-          "keywords": [
-            "🇺🇸|US|us|美国|美|United States"
-          ]
-        }
-      ],
+      "outbounds": [],
       "interrupt_exist_connections": true
     },
     {
       "tag": "Others",
       "type": "selector",
-      "outbounds": [
-        "{all}"
-      ],
-      "filter": [
-        {
-          "action": "exclude",
-          "keywords": [
-            "🇭🇰|HK|hk|香港|香|🇹🇼|TW|tw|台湾|台|🇸🇬|SG|sg|新加坡|狮|🇯🇵|JP|jp|日本|日|🇺🇸|US|us|美国|美",
-            "网站|过期|时间|地址|注册",
-            "官网|剩余|流量|套餐|到期"
-          ]
-        }
-      ],
+      "outbounds": [],
       "interrupt_exist_connections": true
     },
     {
       "tag": "auto",
       "type": "urltest",
-      "outbounds": [
-        "{all}"
-      ],
+      "outbounds": [],
       "url": "http://www.gstatic.com/generate_204",
       "interval": "30m",
       "tolerance": 30

@@ -121,7 +121,7 @@
         "rule_set": [
           "Reject"
         ],
-        "action": "predefined"
+        "action": "reject"
       },
       {
         "clash_mode": "Direct",

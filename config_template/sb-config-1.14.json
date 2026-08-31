@@ -589,7 +589,6 @@
       {
         "rule_set": [
           "Google",
-          "YouTube",
           "Github"
         ],
         "action": "route",
@@ -636,13 +635,6 @@
       },
       {
         "rule_set": [
-          "ChinaDomain"
-        ],
-        "action": "route",
-        "outbound": "Direct"
-      },
-      {
-        "rule_set": [
           "Proxy"
         ],
         "action": "route",
@@ -654,6 +646,13 @@
         ],
         "action": "route",
         "outbound": "Proxy"
+      },
+      {
+        "rule_set": [
+          "ChinaDomain"
+        ],
+        "action": "route",
+        "outbound": "Direct"
       },
       {
         "action": "resolve"

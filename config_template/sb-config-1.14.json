@@ -348,6 +348,20 @@
       "interrupt_exist_connections": true
     },
     {
+      "tag": "Talkatone",
+      "type": "selector",
+      "outbounds": [
+        "Proxy",
+        "HongKong",
+        "America",
+        "Singapore",
+        "Japan",
+        "Taiwan"
+      ],
+      "default": "HongKong",
+      "interrupt_exist_connections": true
+    },
+    {
       "tag": "Microsoft",
       "type": "selector",
       "outbounds": [
@@ -580,6 +594,13 @@
       },
       {
         "rule_set": [
+          "Talkatone"
+        ],
+        "action": "route",
+        "outbound": "Talkatone"
+      },
+      {
+        "rule_set": [
           "Twitter",
           "Facebook"
         ],
@@ -604,7 +625,8 @@
       {
         "rule_set": [
           "Google",
-          "Github"
+          "Github",
+          "Reddit"
         ],
         "action": "route",
         "outbound": "Google"
@@ -768,6 +790,20 @@
         "tag": "YouTube",
         "format": "binary",
         "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Repcz/Tool/X/sing-box/Rules/YouTube.srs",
+        "update_interval": "24h"
+      },
+      {
+        "type": "remote",
+        "tag": "Talkatone",
+        "format": "binary",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Repcz/Tool/X/sing-box/Rules/Talkatone.srs",
+        "update_interval": "24h"
+      },
+      {
+        "type": "remote",
+        "tag": "Reddit",
+        "format": "binary",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Repcz/Tool/X/sing-box/Rules/Reddit.srs",
         "update_interval": "24h"
       },
       {

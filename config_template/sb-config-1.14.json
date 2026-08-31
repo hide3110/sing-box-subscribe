@@ -121,7 +121,8 @@
         "rule_set": [
           "Reject"
         ],
-        "action": "predefined"
+        "action": "predefined",
+        "rcode": "NXDOMAIN"
       },
       {
         "clash_mode": "Direct",

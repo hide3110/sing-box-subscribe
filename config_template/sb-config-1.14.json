@@ -121,7 +121,7 @@
         "rule_set": [
           "Reject"
         ],
-        "action": "reject"
+        "action": "predefined"
       },
       {
         "clash_mode": "Direct",
@@ -575,7 +575,7 @@
           "YouTube"
         ],
         "action": "route",
-        "outbound": "Proxy"
+        "outbound": "YouTube"
       },
       {
         "rule_set": [
@@ -649,6 +649,13 @@
       },
       {
         "rule_set": [
+          "ChinaDomain"
+        ],
+        "action": "route",
+        "outbound": "Direct"
+      },
+      {
+        "rule_set": [
           "Proxy"
         ],
         "action": "route",
@@ -660,13 +667,6 @@
         ],
         "action": "route",
         "outbound": "Proxy"
-      },
-      {
-        "rule_set": [
-          "ChinaDomain"
-        ],
-        "action": "route",
-        "outbound": "Direct"
       },
       {
         "action": "resolve"

@@ -710,199 +710,39 @@
     "rule_set": [
       {
         "type": "remote",
-        "tag": "Reject",
+        "tag": [
+          "Reject",
+          "Ads_AWAvenue",
+          "Proxy",
+          "AI",
+          "Telegram",
+          "Twitter",
+          "Facebook",
+          "TikTok",
+          "Steam",
+          "Epic",
+          "Google",
+          "YouTube",
+          "Talkatone",
+          "Reddit",
+          "Github",
+          "Microsoft",
+          "Bilibili",
+          "Bahamut",
+          "Emby",
+          "Spotify",
+          "Netflix",
+          "Disney",
+          "PrimeVideo",
+          "HBO",
+          "AppleCN",
+          "AppleProxy",
+          "ChinaDomain",
+          "ChinaIP"
+        ],
         "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Repcz/Tool/X/sing-box/Rules/Reject.srs",
-        "update_interval": "24h"
-      },
-      {
-        "type": "remote",
-        "tag": "Ads_AWAvenue",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Repcz/Tool/X/sing-box/Rules/Ads_AWAvenue.srs",
-        "update_interval": "24h"
-      },
-      {
-        "type": "remote",
-        "tag": "Proxy",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Repcz/Tool/X/sing-box/Rules/Proxy.srs",
-        "update_interval": "24h"
-      },
-      {
-        "type": "remote",
-        "tag": "AI",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Repcz/Tool/X/sing-box/Rules/AI.srs",
-        "update_interval": "24h"
-      },
-      {
-        "type": "remote",
-        "tag": "Telegram",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Repcz/Tool/X/sing-box/Rules/Telegram.srs",
-        "update_interval": "24h"
-      },
-      {
-        "type": "remote",
-        "tag": "Twitter",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Repcz/Tool/X/sing-box/Rules/Twitter.srs",
-        "update_interval": "24h"
-      },
-      {
-        "type": "remote",
-        "tag": "Facebook",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Repcz/Tool/X/sing-box/Rules/Facebook.srs",
-        "update_interval": "24h"
-      },
-      {
-        "type": "remote",
-        "tag": "TikTok",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Repcz/Tool/X/sing-box/Rules/TikTok.srs",
-        "update_interval": "24h"
-      },
-      {
-        "type": "remote",
-        "tag": "Steam",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Repcz/Tool/X/sing-box/Rules/Steam.srs",
-        "update_interval": "24h"
-      },
-      {
-        "type": "remote",
-        "tag": "Epic",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Repcz/Tool/X/sing-box/Rules/Epic.srs",
-        "update_interval": "24h"
-      },
-      {
-        "type": "remote",
-        "tag": "Google",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Repcz/Tool/X/sing-box/Rules/Google.srs",
-        "update_interval": "24h"
-      },
-      {
-        "type": "remote",
-        "tag": "YouTube",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Repcz/Tool/X/sing-box/Rules/YouTube.srs",
-        "update_interval": "24h"
-      },
-      {
-        "type": "remote",
-        "tag": "Talkatone",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Repcz/Tool/X/sing-box/Rules/Talkatone.srs",
-        "update_interval": "24h"
-      },
-      {
-        "type": "remote",
-        "tag": "Reddit",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Repcz/Tool/X/sing-box/Rules/Reddit.srs",
-        "update_interval": "24h"
-      },
-      {
-        "type": "remote",
-        "tag": "Github",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Repcz/Tool/X/sing-box/Rules/Github.srs",
-        "update_interval": "24h"
-      },
-      {
-        "type": "remote",
-        "tag": "Microsoft",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Repcz/Tool/X/sing-box/Rules/Microsoft.srs",
-        "update_interval": "24h"
-      },
-      {
-        "type": "remote",
-        "tag": "Bilibili",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Repcz/Tool/X/sing-box/Rules/Bilibili.srs",
-        "update_interval": "24h"
-      },
-      {
-        "type": "remote",
-        "tag": "Bahamut",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Repcz/Tool/X/sing-box/Rules/Bahamut.srs",
-        "update_interval": "24h"
-      },
-      {
-        "type": "remote",
-        "tag": "Emby",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Repcz/Tool/X/sing-box/Rules/Emby.srs",
-        "update_interval": "24h"
-      },
-      {
-        "type": "remote",
-        "tag": "Spotify",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Repcz/Tool/X/sing-box/Rules/Spotify.srs",
-        "update_interval": "24h"
-      },
-      {
-        "type": "remote",
-        "tag": "Netflix",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Repcz/Tool/X/sing-box/Rules/Netflix.srs",
-        "update_interval": "24h"
-      },
-      {
-        "type": "remote",
-        "tag": "Disney",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Repcz/Tool/X/sing-box/Rules/Disney.srs",
-        "update_interval": "24h"
-      },
-      {
-        "type": "remote",
-        "tag": "PrimeVideo",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Repcz/Tool/X/sing-box/Rules/PrimeVideo.srs",
-        "update_interval": "24h"
-      },
-      {
-        "type": "remote",
-        "tag": "HBO",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Repcz/Tool/X/sing-box/Rules/HBO.srs",
-        "update_interval": "24h"
-      },
-      {
-        "type": "remote",
-        "tag": "AppleCN",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Repcz/Tool/X/sing-box/Rules/AppleCN.srs",
-        "update_interval": "24h"
-      },
-      {
-        "type": "remote",
-        "tag": "AppleProxy",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Repcz/Tool/X/sing-box/Rules/AppleProxy.srs",
-        "update_interval": "24h"
-      },
-      {
-        "type": "remote",
-        "tag": "ChinaDomain",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Repcz/Tool/X/sing-box/Rules/ChinaDomain.srs",
-        "update_interval": "24h"
-      },
-      {
-        "type": "remote",
-        "tag": "ChinaIP",
-        "format": "binary",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Repcz/Tool/X/sing-box/Rules/ChinaIP.srs",
-        "update_interval": "24h"
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Repcz/Tool/X/sing-box/Rules/{tag}.srs",
+        "update_interval": "2d"
       }
     ]
   }

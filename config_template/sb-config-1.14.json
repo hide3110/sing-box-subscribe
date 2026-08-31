@@ -291,6 +291,34 @@
       "interrupt_exist_connections": true
     },
     {
+      "tag": "Telegram",
+      "type": "selector",
+      "outbounds": [
+        "Proxy",
+        "HongKong",
+        "America",
+        "Singapore",
+        "Japan",
+        "Taiwan"
+      ],
+      "default": "Proxy",
+      "interrupt_exist_connections": true
+    },
+    {
+      "tag": "YouTube",
+      "type": "selector",
+      "outbounds": [
+        "Proxy",
+        "HongKong",
+        "America",
+        "Singapore",
+        "Japan",
+        "Taiwan"
+      ],
+      "default": "Proxy",
+      "interrupt_exist_connections": true
+    },
+    {
       "tag": "AI",
       "type": "selector",
       "outbounds": [
@@ -359,20 +387,6 @@
         "Taiwan"
       ],
       "default": "America",
-      "interrupt_exist_connections": true
-    },
-    {
-      "tag": "Telegram",
-      "type": "selector",
-      "outbounds": [
-        "Proxy",
-        "HongKong",
-        "America",
-        "Singapore",
-        "Japan",
-        "Taiwan"
-      ],
-      "default": "HongKong",
       "interrupt_exist_connections": true
     },
     {

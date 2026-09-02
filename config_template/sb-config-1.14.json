@@ -152,7 +152,9 @@
           {
             "rule_set": [
               "Reject",
-              "Ads_AWAvenue"
+              "Ads_AWAvenue",
+              "geosite_adguard",
+              "geosite-category-ads-all"
             ]
           }
         ],
@@ -522,11 +524,6 @@
     }
   ],
   "route": {
-    "default_domain_resolver": "ali-udp",
-    "default_http_client": "default",
-    "auto_detect_interface": true,
-    "find_process": true,
-    "final": "Proxy",
     "rules": [
       {
         "action": "sniff"
@@ -554,6 +551,14 @@
         "outbound": "Direct"
       },
       {
+        "protocol": "ntp",
+        "outbound": "Direct"
+      },
+      {
+        "domain_suffix": "cdn.jsdelivr.net",
+        "outbound": "Direct"
+      },
+      {
         "clash_mode": "Direct",
         "action": "route",
         "outbound": "Direct"
@@ -576,11 +581,21 @@
           {
             "rule_set": [
               "Reject",
-              "Ads_AWAvenue"
+              "Ads_AWAvenue",
+              "geosite_adguard",
+              "geosite-category-ads-all"
             ]
           }
         ],
         "action": "reject"
+      },
+      {
+        "protocol": [
+          "stun",
+          "dtls"
+        ], 
+        "action": "reject",
+        "method": "drop"
       },
       {
         "rule_set": [
@@ -754,7 +769,26 @@
         "format": "binary",
         "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Repcz/Tool/X/sing-box/Rules/{tag}.srs",
         "update_interval": "2d"
+      },
+      {
+        "type": "remote",
+        "tag": "geosite_adguard",
+        "format": "binary",
+        "url": "https://cdn.jsdelivr.net/gh/217heidai/adblockfilters@main/rules/adblocksingbox.srs",
+        "update_interval": "2d"
+      },
+      {
+        "type": "remote", 
+        "tag": "geosite-category-ads-all", 
+        "format": "binary",
+        "url": "https://cdn.jsdelivr.net/gh/SagerNet/sing-geosite@rule-set/geosite-category-ads-all.srs",
+        "update_interval": "2d" 
       }
-    ]
+    ],
+    "default_domain_resolver": "ali-udp",
+    "default_http_client": "default",
+    "auto_detect_interface": true,
+    "find_process": true,
+    "final": "Proxy"
   }
 }

@@ -1,0 +1,793 @@
+{
+  "log": {
+    "disabled": false,
+    "level": "warn",
+    "timestamp": true
+  },
+  "experimental": {
+    "clash_api": {
+      "external_controller": "127.0.0.1:9099",
+      "external_ui": "zashboard",
+      "secret": "singbox",
+      "external_ui_download_url": "https://gh-proxy.com/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip",
+      "external_ui_download_detour": "Direct",
+      "default_mode": "Rule"
+    },
+    "cache_file": {
+      "enabled": true,
+      "store_fakeip": true,
+      "store_dns": true
+    }
+  },
+  "services": [
+    {
+      "type": "api",
+      "listen": "::",
+      "listen_port": 9999,
+      "secret": "singbox",
+      "dashboard": {
+        "enabled": true,
+        "path": "dashboard",
+        "download_url": "https://gh-proxy.com/https://github.com/SagerNet/sing-box-dashboard/archive/refs/heads/gh-pages.zip",
+        "http_client": "default",
+        "update_interval": "1d"
+      }
+    }
+  ],
+  "http_clients": [
+    {
+      "tag": "default",
+      "version": 2,
+      "detour": "Proxy"
+    }
+  ],
+  "dns": {
+    "servers": [
+      {
+        "tag": "hosts_fix",
+        "type": "hosts",
+        "predefined": {
+          "dns.alidns.com": [
+            "223.5.5.5",
+            "223.6.6.6"
+          ],
+          "doh.pub": [
+            "1.12.12.21",
+            "120.53.53.53"
+          ],
+          "dns.google": [
+            "8.8.8.8",
+            "8.8.4.4"
+          ],
+          "cloudflare-dns.com": [
+            "104.16.248.249",
+            "104.16.249.249"
+          ]
+        }
+      },
+      {
+        "tag": "cf-doh",
+        "type": "https",
+        "server": "cloudflare-dns.com",
+        "detour": "Proxy",
+        "domain_resolver": "hosts_fix"
+      },
+      {
+        "tag": "gg-doh",
+        "type": "https",
+        "server": "dns.google",
+        "detour": "Proxy",
+        "domain_resolver": "hosts_fix"
+      },
+      {
+        "tag": "ali-doh",
+        "type": "https",
+        "server": "dns.alidns.com",
+        "domain_resolver": "hosts_fix"
+      },
+      {
+        "tag": "tx-doh",
+        "type": "https",
+        "server": "doh.pub",
+        "domain_resolver": "hosts_fix"
+      },
+      {
+        "tag": "ali-udp",
+        "type": "udp",
+        "server": "223.5.5.5"
+      },
+      {
+        "tag": "tx-udp",
+        "type": "udp",
+        "server": "119.29.29.29"
+      },
+      {
+        "tag": "remote",
+        "type": "fakeip",
+        "inet4_range": "198.18.0.0/15",
+        "inet6_range": "fc00::/18"
+      },
+      {
+        "tag": "local",
+        "type": "local",
+        "neighbor_domain": [
+          ".local",
+          ".lan"
+        ]
+      }
+    ],
+    "rules": [
+      {
+        "rule_set": [
+          "Reject"
+        ],
+        "action": "predefined",
+        "rcode": "NXDOMAIN"
+      },
+      {
+        "clash_mode": "Direct",
+        "action": "route",
+        "server": "local"
+      },
+      {
+        "clash_mode": "Global",
+        "action": "route",
+        "server": "remote"
+      },
+      {
+        "rule_set": [
+          "AppleCN"
+        ],
+        "action": "route",
+        "server": "ali-doh"
+      },
+      {
+        "type": "logical",
+        "mode": "and",
+        "rules": [
+          {
+            "clash_mode": "AllowAds",
+            "invert": true
+          },
+          {
+            "rule_set": [
+              "Reject",
+              "Ads_AWAvenue",
+              "geosite_adguard",
+              "geosite-category-ads-all"
+            ]
+          }
+        ],
+        "action": "reject"
+      },
+      {
+        "rule_set": [
+          "ChinaDomain"
+        ],
+        "query_type": [
+          "A",
+          "AAAA"
+        ],
+        "action": "evaluate",
+        "server": "ali-udp",
+        "tag": "ali-response",
+        "timeout": "3s"
+      },
+      {
+        "rule_set": [
+          "ChinaDomain"
+        ],
+        "query_type": [
+          "A",
+          "AAAA"
+        ],
+        "action": "evaluate",
+        "server": "tx-udp",
+        "tag": "tx-response",
+        "timeout": "3s"
+      },
+      {
+        "rule_set": [
+          "ChinaDomain"
+        ],
+        "query_type": [
+          "A",
+          "AAAA"
+        ],
+        "match_response": "ali-response",
+        "ip_accept_any": true,
+        "action": "respond",
+        "race": true
+      },
+      {
+        "rule_set": [
+          "ChinaDomain"
+        ],
+        "query_type": [
+          "A",
+          "AAAA"
+        ],
+        "match_response": "tx-response",
+        "ip_accept_any": true,
+        "action": "respond",
+        "race": true
+      },
+      {
+        "rule_set": [
+          "ChinaDomain"
+        ],
+        "action": "route",
+        "server": "ali-udp",
+        "timeout": "3s"
+      },
+      {
+        "query_type": "HTTPS",
+        "action": "reject"
+      },
+      {
+        "domain_suffix": [
+          "lancache.steamcontent.com",
+          "10099.com.cn",
+          "msftconnecttest.com",
+          "msftncsi.com",
+          "local",
+          "lan",
+          "home",
+          "internal",
+          "corp",
+          "example.com"
+        ],
+        "server": "local"
+      },
+      {
+        "query_type": [
+          "A",
+          "AAAA"
+        ],
+        "action": "route",
+        "server": "remote",
+        "rewrite_ttl": 1
+      }
+    ],
+    "optimistic": true,
+    "strategy": "prefer_ipv4",
+    "final": "ali-doh"
+  },
+  "inbounds": [
+    {
+      "tag": "tun-in",
+      "type": "tun",
+      "address": [
+        "172.19.0.0/30",
+        "fdfe:dcba:9876::0/126"
+      ],
+      "stack": "mixed",
+      "auto_route": true,
+      "strict_route": true,
+      "platform": {
+        "http_proxy": {
+          "enabled": true,
+          "server": "127.0.0.1",
+          "server_port": 7890
+        }
+      }
+    },
+    {
+      "tag": "mixed-in",
+      "type": "mixed",
+      "listen": "127.0.0.1",
+      "listen_port": 7890
+    }
+  ],
+  "outbounds": [
+    {
+      "tag": "Direct",
+      "type": "direct"
+    },
+    {
+      "tag": "Proxy",
+      "type": "selector",
+      "outbounds": [
+        "auto"
+      ],
+      "default": "auto",
+      "interrupt_exist_connections": true
+    },
+    {
+      "tag": "Telegram",
+      "type": "selector",
+      "outbounds": [
+        "Proxy",
+        "HongKong",
+        "America",
+        "Singapore",
+        "Japan",
+        "Taiwan"
+      ],
+      "default": "Proxy",
+      "interrupt_exist_connections": true
+    },
+    {
+      "tag": "YouTube",
+      "type": "selector",
+      "outbounds": [
+        "Proxy",
+        "HongKong",
+        "America",
+        "Singapore",
+        "Japan",
+        "Taiwan"
+      ],
+      "default": "Proxy",
+      "interrupt_exist_connections": true
+    },
+    {
+      "tag": "AI",
+      "type": "selector",
+      "outbounds": [
+        "Proxy",
+        "HongKong",
+        "America",
+        "Singapore",
+        "Japan",
+        "Taiwan"
+      ],
+      "default": "America",
+      "interrupt_exist_connections": true
+    },
+    {
+      "tag": "Google",
+      "type": "selector",
+      "outbounds": [
+        "Proxy",
+        "HongKong",
+        "America",
+        "Singapore",
+        "Japan",
+        "Taiwan"
+      ],
+      "default": "America",
+      "interrupt_exist_connections": true
+    },
+    {
+      "tag": "Talkatone",
+      "type": "selector",
+      "outbounds": [
+        "Proxy",
+        "HongKong",
+        "America",
+        "Singapore",
+        "Japan",
+        "Taiwan"
+      ],
+      "default": "HongKong",
+      "interrupt_exist_connections": true
+    },
+    {
+      "tag": "Microsoft",
+      "type": "selector",
+      "outbounds": [
+        "Proxy",
+        "HongKong",
+        "America",
+        "Singapore",
+        "Japan",
+        "Taiwan",
+        "Direct"
+      ],
+      "default": "Direct",
+      "interrupt_exist_connections": true
+    },
+    {
+      "tag": "Social",
+      "type": "selector",
+      "outbounds": [
+        "Proxy",
+        "HongKong",
+        "America",
+        "Singapore",
+        "Japan",
+        "Taiwan"
+      ],
+      "default": "HongKong",
+      "interrupt_exist_connections": true
+    },
+    {
+      "tag": "TikTok",
+      "type": "selector",
+      "outbounds": [
+        "Proxy",
+        "HongKong",
+        "America",
+        "Singapore",
+        "Japan",
+        "Taiwan"
+      ],
+      "default": "America",
+      "interrupt_exist_connections": true
+    },
+    {
+      "tag": "Game",
+      "type": "selector",
+      "outbounds": [
+        "Proxy",
+        "HongKong",
+        "America",
+        "Singapore",
+        "Japan",
+        "Taiwan",
+        "Direct"
+      ],
+      "default": "Proxy",
+      "interrupt_exist_connections": true
+    },
+    {
+      "tag": "Emby",
+      "type": "selector",
+      "outbounds": [
+        "Proxy",
+        "HongKong",
+        "America",
+        "Singapore",
+        "Japan",
+        "Taiwan",
+        "Direct"
+      ],
+      "default": "Proxy",
+      "interrupt_exist_connections": true
+    },
+    {
+      "tag": "Spotify",
+      "type": "selector",
+      "outbounds": [
+        "Proxy",
+        "HongKong",
+        "America",
+        "Singapore",
+        "Japan",
+        "Taiwan",
+        "Direct"
+      ],
+      "default": "Proxy",
+      "interrupt_exist_connections": true
+    },
+    {
+      "tag": "Streaming",
+      "type": "selector",
+      "outbounds": [
+        "Proxy",
+        "HongKong",
+        "America",
+        "Singapore",
+        "Japan",
+        "Taiwan"
+      ],
+      "default": "Proxy",
+      "interrupt_exist_connections": true
+    },
+    {
+      "tag": "BiliBili",
+      "type": "selector",
+      "outbounds": [
+        "HongKong",
+        "Taiwan",
+        "Direct"
+      ],
+      "default": "Direct",
+      "interrupt_exist_connections": true
+    },
+    {
+      "tag": "HongKong",
+      "type": "selector",
+      "outbounds": [],
+      "interrupt_exist_connections": true
+    },
+    {
+      "tag": "Taiwan",
+      "type": "selector",
+      "outbounds": [],
+      "interrupt_exist_connections": true
+    },
+    {
+      "tag": "America",
+      "type": "selector",
+      "outbounds": [],
+      "interrupt_exist_connections": true
+    },
+    {
+      "tag": "Singapore",
+      "type": "selector",
+      "outbounds": [],
+      "interrupt_exist_connections": true
+    },
+    {
+      "tag": "Japan",
+      "type": "selector",
+      "outbounds": [],
+      "interrupt_exist_connections": true
+    },
+    {
+      "tag": "Others",
+      "type": "selector",
+      "outbounds": [],
+      "interrupt_exist_connections": true
+    },
+    {
+      "tag": "auto",
+      "type": "urltest",
+      "outbounds": [],
+      "url": "http://www.gstatic.com/generate_204",
+      "idle_timeout": "30m0s",
+      "interval": "20m0s",
+      "tolerance": 30
+    }
+  ],
+  "route": {
+    "rules": [
+      {
+        "action": "sniff"
+      },
+      {
+        "type": "logical",
+        "mode": "or",
+        "rules": [
+          {
+            "port": 53
+          },
+          {
+            "protocol": "dns"
+          }
+        ],
+        "action": "hijack-dns"
+      },
+      {
+        "ip_cidr": [
+          "192.168.0.0/16",
+          "172.16.0.0/12",
+          "127.0.0.0/8",
+          "fe80::/10"
+        ], 
+        "outbound": "Direct"
+      },
+      {
+        "protocol": "ntp",
+        "outbound": "Direct"
+      },
+      {
+        "domain_suffix": "cdn.jsdelivr.net",
+        "outbound": "Direct"
+      },
+      {
+        "clash_mode": "Direct",
+        "action": "route",
+        "outbound": "Direct"
+      },
+      {
+        "rule_set": [
+          "AppleCN"
+        ],
+        "action": "route",
+        "outbound": "Direct"
+      },
+      {
+        "type": "logical",
+        "mode": "and",
+        "rules": [
+          {
+            "clash_mode": "AllowAds",
+            "invert": true
+          },
+          {
+            "rule_set": [
+              "Reject",
+              "Ads_AWAvenue",
+              "geosite_adguard",
+              "geosite-category-ads-all"
+            ]
+          }
+        ],
+        "action": "reject"
+      },
+      {
+        "protocol": [
+          "stun",
+          "dtls"
+        ], 
+        "action": "reject",
+        "method": "drop"
+      },
+      {
+        "rule_set": [
+          "AI"
+        ],
+        "action": "route",
+        "outbound": "AI"
+      },
+      {
+        "rule_set": [
+          "Telegram"
+        ],
+        "action": "route",
+        "outbound": "Telegram"
+      },
+      {
+        "rule_set": [
+          "YouTube"
+        ],
+        "action": "route",
+        "outbound": "YouTube"
+      },
+      {
+        "rule_set": [
+          "Talkatone"
+        ],
+        "action": "route",
+        "outbound": "Talkatone"
+      },
+      {
+        "rule_set": [
+          "Twitter",
+          "Facebook"
+        ],
+        "action": "route",
+        "outbound": "Social"
+      },
+      {
+        "rule_set": [
+          "TikTok"
+        ],
+        "action": "route",
+        "outbound": "TikTok"
+      },
+      {
+        "rule_set": [
+          "Steam",
+          "Epic"
+        ],
+        "action": "route",
+        "outbound": "Game"
+      },
+      {
+        "rule_set": [
+          "Google",
+          "Github",
+          "Reddit"
+        ],
+        "action": "route",
+        "outbound": "Google"
+      },
+      {
+        "rule_set": [
+          "Microsoft"
+        ],
+        "action": "route",
+        "outbound": "Microsoft"
+      },
+      {
+        "rule_set": [
+          "Emby"
+        ],
+        "action": "route",
+        "outbound": "Emby"
+      },
+      {
+        "rule_set": [
+          "Spotify"
+        ],
+        "action": "route",
+        "outbound": "Spotify"
+      },
+      {
+        "rule_set": [
+          "Bilibili"
+        ],
+        "action": "route",
+        "outbound": "BiliBili"
+      },
+      {
+        "rule_set": [
+          "Bahamut",
+          "Netflix",
+          "Disney",
+          "PrimeVideo",
+          "HBO"
+        ],
+        "action": "route",
+        "outbound": "Streaming"
+      },
+      {
+        "rule_set": [
+          "ChinaDomain"
+        ],
+        "action": "route",
+        "outbound": "Direct"
+      },
+      {
+        "rule_set": [
+          "Proxy"
+        ],
+        "action": "route",
+        "outbound": "Proxy"
+      },
+      {
+        "rule_set": [
+          "AppleProxy"
+        ],
+        "action": "route",
+        "outbound": "Proxy"
+      },
+      {
+        "action": "resolve"
+      },
+      {
+        "rule_set": [
+          "ChinaIP"
+        ],
+        "action": "route",
+        "outbound": "Direct"
+      },
+      {
+        "ip_is_private": true,
+        "action": "route",
+        "outbound": "Direct"
+      }
+    ],
+    "rule_set": [
+      {
+        "type": "remote",
+        "tag": [
+          "Reject",
+          "Ads_AWAvenue",
+          "Proxy",
+          "AI",
+          "Telegram",
+          "Twitter",
+          "Facebook",
+          "TikTok",
+          "Steam",
+          "Epic",
+          "Google",
+          "YouTube",
+          "Talkatone",
+          "Reddit",
+          "Github",
+          "Microsoft",
+          "Bilibili",
+          "Bahamut",
+          "Emby",
+          "Spotify",
+          "Netflix",
+          "Disney",
+          "PrimeVideo",
+          "HBO",
+          "AppleCN",
+          "AppleProxy",
+          "ChinaDomain",
+          "ChinaIP"
+        ],
+        "format": "binary",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Repcz/Tool/X/sing-box/Rules/{tag}.srs",
+        "update_interval": "2d"
+      },
+      {
+        "type": "remote",
+        "tag": "geosite_adguard",
+        "format": "binary",
+        "url": "https://cdn.jsdelivr.net/gh/217heidai/adblockfilters@main/rules/adblocksingbox.srs",
+        "update_interval": "2d"
+      },
+      {
+        "type": "remote", 
+        "tag": "geosite-category-ads-all", 
+        "format": "binary",
+        "url": "https://cdn.jsdelivr.net/gh/SagerNet/sing-geosite@rule-set/geosite-category-ads-all.srs",
+        "update_interval": "2d" 
+      }
+    ],
+    "default_domain_resolver": "ali-udp",
+    "default_http_client": "default",
+    "auto_detect_interface": true,
+    "find_process": true,
+    "final": "Proxy"
+  }
+}

@@ -153,8 +153,7 @@
             "rule_set": [
               "Reject",
               "Ads_AWAvenue",
-              "geosite_adguard",
-              "geosite-category-ads-all"
+              "geosite_adguard"
             ]
           }
         ],
@@ -407,36 +406,6 @@
       "interrupt_exist_connections": true
     },
     {
-      "tag": "Game",
-      "type": "selector",
-      "outbounds": [
-        "Proxy",
-        "HongKong",
-        "America",
-        "Singapore",
-        "Japan",
-        "Taiwan",
-        "Direct"
-      ],
-      "default": "Proxy",
-      "interrupt_exist_connections": true
-    },
-    {
-      "tag": "Emby",
-      "type": "selector",
-      "outbounds": [
-        "Proxy",
-        "HongKong",
-        "America",
-        "Singapore",
-        "Japan",
-        "Taiwan",
-        "Direct"
-      ],
-      "default": "Proxy",
-      "interrupt_exist_connections": true
-    },
-    {
       "tag": "Spotify",
       "type": "selector",
       "outbounds": [
@@ -581,8 +550,7 @@
             "rule_set": [
               "Reject",
               "Ads_AWAvenue",
-              "geosite_adguard",
-              "geosite-category-ads-all"
+              "geosite_adguard"
             ]
           }
         ],
@@ -641,14 +609,6 @@
       },
       {
         "rule_set": [
-          "Steam",
-          "Epic"
-        ],
-        "action": "route",
-        "outbound": "Game"
-      },
-      {
-        "rule_set": [
           "Google",
           "Github",
           "Reddit"
@@ -662,13 +622,6 @@
         ],
         "action": "route",
         "outbound": "Microsoft"
-      },
-      {
-        "rule_set": [
-          "Emby"
-        ],
-        "action": "route",
-        "outbound": "Emby"
       },
       {
         "rule_set": [
@@ -686,10 +639,8 @@
       },
       {
         "rule_set": [
-          "Bahamut",
           "Netflix",
           "Disney",
-          "PrimeVideo",
           "HBO"
         ],
         "action": "route",
@@ -744,8 +695,6 @@
           "Twitter",
           "Facebook",
           "TikTok",
-          "Steam",
-          "Epic",
           "Google",
           "YouTube",
           "Talkatone",
@@ -753,12 +702,9 @@
           "Github",
           "Microsoft",
           "Bilibili",
-          "Bahamut",
-          "Emby",
           "Spotify",
           "Netflix",
           "Disney",
-          "PrimeVideo",
           "HBO",
           "AppleCN",
           "AppleProxy",
@@ -775,13 +721,6 @@
         "format": "binary",
         "url": "https://cdn.jsdelivr.net/gh/217heidai/adblockfilters@main/rules/adblocksingbox.srs",
         "update_interval": "2d"
-      },
-      {
-        "type": "remote", 
-        "tag": "geosite-category-ads-all", 
-        "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/SagerNet/sing-geosite@rule-set/geosite-category-ads-all.srs",
-        "update_interval": "2d" 
       }
     ],
     "default_domain_resolver": "ali-udp",

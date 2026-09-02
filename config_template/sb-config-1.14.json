@@ -259,8 +259,9 @@
         "172.19.0.0/30",
         "fdfe:dcba:9876::0/126"
       ],
-      "stack": "system",
+      "stack": "mixed",
       "auto_route": true,
+      "auto_redirect": true,
       "strict_route": true,
       "platform": {
         "http_proxy": {
@@ -515,7 +516,8 @@
       "type": "urltest",
       "outbounds": [],
       "url": "http://www.gstatic.com/generate_204",
-      "interval": "30m",
+      "idle_timeout": "30m0s"
+      "interval": "20m0s",
       "tolerance": 30
     }
   ],
@@ -541,6 +543,15 @@
           }
         ],
         "action": "hijack-dns"
+      },
+      {
+        "ip_cidr": [
+          "192.168.0.0/16",
+          "172.16.0.0/12",
+          "127.0.0.0/8",
+          "fe80::/10"
+        ], 
+        "outbound": "Direct"
       },
       {
         "clash_mode": "Direct",

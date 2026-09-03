@@ -363,21 +363,6 @@
       "interrupt_exist_connections": true
     },
     {
-      "tag": "Microsoft",
-      "type": "selector",
-      "outbounds": [
-        "Proxy",
-        "HongKong",
-        "America",
-        "Singapore",
-        "Japan",
-        "Taiwan",
-        "Direct"
-      ],
-      "default": "Direct",
-      "interrupt_exist_connections": true
-    },
-    {
       "tag": "Social",
       "type": "selector",
       "outbounds": [
@@ -618,13 +603,6 @@
       },
       {
         "rule_set": [
-          "Microsoft"
-        ],
-        "action": "route",
-        "outbound": "Microsoft"
-      },
-      {
-        "rule_set": [
           "Spotify"
         ],
         "action": "route",
@@ -645,6 +623,13 @@
         ],
         "action": "route",
         "outbound": "Streaming"
+      },
+      {
+        "rule_set": [
+          "Microsoft"
+        ],
+        "action": "route",
+        "outbound": "Direct"
       },
       {
         "rule_set": [

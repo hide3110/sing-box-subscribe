@@ -479,6 +479,29 @@
   "route": {
     "rules": [
       {
+        "rule_set": [
+          "ChinaIP"
+        ],
+        "port": 993,
+        "action": "reject"
+      },
+      {
+        "type": "logical",
+        "mode": "and",
+        "rules": [
+          {
+            "ip_version": 6
+          },
+          {
+            "default_interface_address": [
+              "2000::/3"
+            ],
+            "invert": true
+          }
+        ],
+        "action": "reject"
+      },
+      {
         "action": "sniff"
       },
       {
@@ -654,13 +677,6 @@
       },
       {
         "action": "resolve"
-      },
-      {
-        "rule_set": [
-          "ChinaIP"
-        ],
-        "port": 993,
-        "action": "reject"
       },
       {
         "rule_set": [

@@ -659,6 +659,13 @@
         "rule_set": [
           "ChinaIP"
         ],
+        "port": 993,
+        "action": "reject"
+      },
+      {
+        "rule_set": [
+          "ChinaIP"
+        ],
         "action": "route",
         "outbound": "Direct"
       },

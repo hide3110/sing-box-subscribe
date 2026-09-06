@@ -330,7 +330,7 @@
       {
         "rule_set": [
           "geosite-ai",
-          "geosite-discord"
+          "geosite-discord",
           "Google",
           "Reddit"
         ],

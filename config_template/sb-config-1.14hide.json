@@ -79,19 +79,16 @@
         "server": "dns_direct"
       },
       {
-        "type": "logical",
-        "mode": "and",
-        "rules": [
-          {
-            "rule_set": "geosite-geolocation-!cn",
-            "invert": true
-          },
-          {
-            "rule_set": "geoip-cn"
-          }
-        ],
+        "rule_set": "geosite-geolocation-!cn",
+        "invert": true,
+        "action": "evaluate",
         "server": "dns_proxy",
         "client_subnet": "114.114.114.114/24"
+      },
+      {
+        "match_response": true,
+        "rule_set": "geoip-cn",
+        "action": "respond"
       },
       {
         "query_type": [
@@ -362,7 +359,7 @@
           "geosite-cn",
           "geosite-geolocation-!cn"
         ],
-        "format": "binary", 
+        "format": "binary",
         "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/{tag}.srs",
         "update_interval": "2d"
       },
@@ -381,7 +378,7 @@
         ],
         "format": "binary",
         "url": "https://raw.githubusercontent.com/hide3110/surge/master/rules/talkatone/{tag}.srs",
-        "update_interval": "2d" 
+        "update_interval": "2d"
       },
       {
         "type": "remote",
@@ -392,14 +389,14 @@
         ],
         "format": "binary",
         "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Repcz/Tool/X/sing-box/Rules/{tag}.srs",
-        "update_interval": "2d" 
+        "update_interval": "2d"
       },
       {
-        "type": "remote", 
-        "tag": "geosite-ai", 
+        "type": "remote",
+        "tag": "geosite-ai",
         "format": "binary",
         "url": "https://github.com/MetaCubeX/meta-rules-dat/raw/sing/geo/geosite/category-ai-!cn.srs",
-        "update_interval": "2d" 
+        "update_interval": "2d"
       }
     ],
     "default_domain_resolver": "dns_direct",

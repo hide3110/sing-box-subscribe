@@ -11,7 +11,7 @@
       "secret": "singbox",
       "external_ui_download_url": "https://gh-proxy.com/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip",
       "external_ui_download_detour": "direct",
-      "default_mode": "Rule"
+      "default_mode": "rule"
     },
     "cache_file": {
       "enabled": true,

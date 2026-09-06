@@ -313,15 +313,15 @@
           "robinfrontend-pa.googleapis.com",
           "claude.ai"
         ],
-        "outbound": "Ai"
+        "outbound": "OpenAI"
       },
       {
         "rule_set": [
           "geosite-ai",
-          "Google"
+          "Google",
           "Reddit"
         ],
-        "outbound": "Ai"
+        "outbound": "OpenAI"
       },
       {
         "rule_set": [

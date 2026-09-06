@@ -31,7 +31,8 @@
       {
         "tag": "dns_proxy",
         "type": "tls",
-        "server": "8.8.8.8"
+        "server": "8.8.8.8",
+        "detour": "proxy"
       },
       {
         "tag": "dns_direct",
